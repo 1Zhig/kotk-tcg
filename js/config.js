@@ -7,8 +7,7 @@ const CONFIG = {
   shopName: "Kings of the Kingdom",
 
   // WhatsApp number in international format, digits only, no "+" or spaces.
-  // Example for Panama: "5076XXXXXXX". Leave empty until the owner gives it.
-  whatsappNumber: "",
+  whatsappNumber: "50765048787",
 
   // Instagram username (without the @)
   instagramUser: "kotkpanama",
