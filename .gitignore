@@ -1,0 +1,14 @@
+# Files Git should NEVER track
+
+# macOS junk
+.DS_Store
+
+# Windows junk
+Thumbs.db
+desktop.ini
+
+# Editor settings (personal to each developer)
+.vscode/
+
+# Secrets — never commit keys or passwords
+.env
