@@ -189,7 +189,9 @@ h3 {
   width: 24px;
   height: 2px;
   background: var(--color-text);
-  transition: transform 0.2s, opacity 0.2s;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
 }
 
 /* When the menu is open, turn the 3 bars into an X */
@@ -279,7 +281,9 @@ h3 {
   font-weight: 700;
   text-decoration: none;
   border: 2px solid transparent;
-  transition: transform 0.15s, background 0.15s;
+  transition:
+    transform 0.15s,
+    background 0.15s;
 }
 
 .btn:hover {
@@ -392,6 +396,13 @@ h3 {
   background: var(--color-yellow);
   color: #000;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- 11. Contact page ---------- */
+.contact-info {
+  display: flex;
+  flex-direction: column; /*stack children top to bottom */
+  gap: var(--space-3); /* same space between each child */
 }
 
 /* ==========================================================
