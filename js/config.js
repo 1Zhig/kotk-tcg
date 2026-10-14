@@ -32,7 +32,7 @@ const CONFIG = {
   showPrices: true,
 
   // At this many units or fewer, show "¡Últimas unidades!"
-  lowStockThreshold: 3,
+  lowStockThreshold: 5,
 
   // How many featured products to show on the homepage
   featuredLimit: 4,

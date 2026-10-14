@@ -7,12 +7,12 @@ Catálogo con stock actualizado, noticias, eventos y pedidos directos por WhatsA
 
 - [x] Estructura base, diseño responsive (mobile-first) y menú móvil
 - [x] Enlaces a WhatsApp/Instagram configurables desde un solo archivo
-- [ ] Catálogo de productos con stock y precio desde Google Sheets
-- [ ] Botón "Pedir por WhatsApp" con mensaje pre-llenado por producto
-- [ ] Preventas
+- [x] Catálogo de productos con stock y precio desde Google Sheets
+- [x] Botón "Pedir por WhatsApp" con mensaje pre-llenado por producto
+- [x] Preventas
 - [ ] Noticias de la comunidad TCG
 - [ ] Eventos (con enlace a formulario de inscripción)
-- [ ] Página de contacto
+- [x] Página de contacto
 - [ ] Publicado en GitHub Pages
 
 ## Tecnologías

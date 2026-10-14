@@ -1,0 +1,121 @@
+/* ==========================================================
+   CONTENT — news and event boxes.
+   Loaded after styles.css and products.css.
+   ========================================================== */
+
+/* ---------- 1. News box ---------- */
+.news-box,
+.event-box {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.news-media {
+  aspect-ratio: 16 / 9; /* wide, like a news photo */
+  background: var(--color-surface-2);
+}
+
+.news-media:empty {
+  display: none; /* no image → no empty gray area */
+}
+
+.news-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill the area, cropping the edges if needed */
+}
+
+.news-body,
+.event-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  flex: 1;
+}
+
+.news-title {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.news-summary {
+  color: var(--color-muted);
+  white-space: pre-line;
+}
+
+.news-body .link-more {
+  margin-top: auto; /* source link sits at the bottom */
+}
+
+/* ---------- 2. Event box ---------- */
+.event-media {
+  background: var(--color-surface-2);
+}
+
+.event-media img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain; /* flyers have text: never crop them */
+}
+
+.event-content {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  flex: 1;
+}
+
+.event-body {
+  padding: 0;
+}
+
+/* Calendar-style date: big day number, short month below */
+.event-date {
+  flex-shrink: 0; /* never squeeze the date */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+}
+
+.event-day {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-yellow);
+}
+
+.event-month {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.event-details {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.event-body .btn {
+  margin-top: var(--space-2);
+}
+
+/* Event boxes need a bit more width than product boxes */
+#events-grid,
+#upcoming-events {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+}
