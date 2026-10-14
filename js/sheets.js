@@ -62,7 +62,15 @@ function parseCSV(text) {
 
    Objects let us write product.nombre instead of row[1].   */
 function rowsToObjects(rows) {
-  const headers = rows[0].map((header) => header.trim().toLowerCase());
+  const headers = rows[0].map(
+    (header) =>
+      header
+        .trim() // quita espacios al inicio y al final
+        .toLowerCase() // "Titulo" → "titulo"
+        .normalize("NFD") // separa las tildes de las letras: "ó" → "o" + "´"
+        .replace(/[\u0300-\u036f]/g, "") // borra esas tildes sueltas
+        .replace(/\s+/g, "_"), // espacios del medio → "_"
+  );
   const dataRows = rows.slice(1); // every row except the headers
 
   return dataRows
@@ -117,7 +125,9 @@ async function loadSheet(tabName) {
   const response = await fetch(url); // download the CSV
 
   if (!response.ok) {
-    throw new Error(`No se pudo cargar "${tabName}" (código ${response.status})`);
+    throw new Error(
+      `No se pudo cargar "${tabName}" (código ${response.status})`,
+    );
   }
 
   const text = await response.text();

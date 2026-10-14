@@ -1,9 +1,11 @@
 /* ==========================================================
    HOME PAGE (index.html)
-   Shows the featured products (destacado = SI).
+   Shows the featured products (destacado = SI) and the
+   next upcoming events.
    ========================================================== */
 
 const featuredGrid = document.querySelector("#featured-products");
+const upcomingGrid = document.querySelector("#upcoming-events");
 
 async function initFeatured() {
   let products;
@@ -34,4 +36,24 @@ async function initFeatured() {
     .join("");
 }
 
+async function initUpcoming() {
+  let events;
+  try {
+    events = await loadUpcomingEvents();
+  } catch (error) {
+    console.error(error);
+    renderStatus(upcomingGrid, "No pudimos cargar los eventos.");
+    return;
+  }
+
+  if (events.length === 0) {
+    renderStatus(upcomingGrid, "No hay eventos programados por ahora.");
+    return;
+  }
+
+  upcomingGrid.innerHTML = events.slice(0, 3).map(renderEventBox).join("");
+}
+
+// Both start at the same time; neither waits for the other.
 initFeatured();
+initUpcoming();
