@@ -9,7 +9,7 @@ const CONFIG = {
 
   // WhatsApp number in international format, digits only, no "+" or spaces.
   // Example for Panama: "5076XXXXXXX". Leave empty until the owner gives it.
-  whatsappNumber: "65048787",
+  whatsappNumber: "50765048787",
 
   // Instagram username (without the @)
   instagramUser: "kotkpanama",

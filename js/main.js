@@ -25,8 +25,9 @@ if (navToggle && siteNav) {
 // Builds a WhatsApp link with a pre-written message.
 // We'll reuse this on Day 2 for "Pedir 2x [producto]".
 function buildWhatsappLink(message) {
+  const number = CONFIG.whatsappNumber.replace(/\D/g, ""); // remove any non-digit characters
   const text = encodeURIComponent(message); // makes spaces/accents URL-safe
-  return `https://wa.me/${CONFIG.whatsappNumber}?text=${text}`;
+  return `https://wa.me/${number}?text=${text}`;
 }
 
 function buildInstagramLink() {
