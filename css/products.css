@@ -1,0 +1,378 @@
+/* ==========================================================
+   PRODUCTS — styles for product boxes, the catalog filters
+   and the product detail page.
+   Loaded AFTER styles.css, so it can use the same variables.
+   Mobile-first again: wider layouts are in @media at the end.
+   ========================================================== */
+
+/* ---------- 1. Product box ---------- */
+.product-box {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden; /* clips the image to the rounded corners */
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.product-box:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-gold);
+}
+
+.product-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+}
+
+/* Square image area with a "KOTK" placeholder behind the photo */
+.product-media {
+  position: relative;
+  aspect-ratio: 1 / 1; /* always a square, whatever the photo size */
+  background: var(--color-surface-2);
+  display: grid;
+  place-items: center;
+}
+
+.product-media::before {
+  content: "KOTK"; /* visible only when there's no image */
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-border);
+  letter-spacing: 0.08em;
+}
+
+.product-media img {
+  position: absolute;
+  inset: 0; /* top/right/bottom/left = 0 → fill the box */
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* show the whole product, never crop it */
+  padding: var(--space-3);
+}
+
+.product-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  flex: 1; /* fills the remaining height so footers line up */
+}
+
+.product-meta {
+  color: var(--color-gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.product-title {
+  font-family: var(--font-body); /* readable font for long names */
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.product-footer {
+  margin-top: auto; /* pushes price + badge to the bottom */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-yellow);
+}
+
+.is-sold-out .product-media img {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+/* ---------- 2. Stock badges ---------- */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid currentColor; /* border uses the text color */
+}
+
+.badge-ok {
+  color: var(--color-success);
+}
+.badge-low {
+  color: var(--color-warning);
+}
+.badge-out {
+  color: var(--color-danger);
+}
+.badge-preorder {
+  color: var(--color-yellow);
+}
+
+/* ---------- 3. Catalog page ---------- */
+.page-header {
+  padding-block: var(--space-5) var(--space-4);
+}
+
+.page-header h1 {
+  font-size: clamp(1.75rem, 6vw, 2.75rem);
+  margin-bottom: var(--space-2);
+}
+
+.filters {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.filter-field select {
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem;
+}
+
+.filter-check {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.filter-check input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-yellow);
+}
+
+.result-count {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-3);
+}
+
+/* Loading, empty and error messages */
+.status-message {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  color: var(--color-muted);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-5) var(--space-3);
+}
+
+.status-message a:not(.btn) {
+  color: var(--color-gold);
+}
+
+/* ---------- 4. Product detail page ---------- */
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+}
+
+.detail-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.detail-media {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.detail-title {
+  font-family: var(--font-body);
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 700;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.detail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+
+.detail-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-yellow);
+}
+
+.detail-release {
+  font-weight: 600;
+}
+
+.detail-description {
+  color: var(--color-muted);
+  white-space: pre-line; /* keeps the line breaks typed in the Sheet */
+}
+
+.detail-soldout {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+/* Quantity selector: [ − ] [ 1 ] [ + ] */
+.qty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.qty-label {
+  font-weight: 700;
+}
+
+.qty-control {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.qty-btn {
+  width: 44px;
+  height: 44px;
+  font-size: 1.25rem;
+  color: var(--color-text);
+  background: var(--color-surface-2);
+  border: 0;
+  cursor: pointer;
+}
+
+.qty-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+#qty-input {
+  width: 56px;
+  text-align: center;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 0;
+  -moz-appearance: textfield; /* hide the browser's own arrows */
+  appearance: textfield;
+}
+
+#qty-input::-webkit-outer-spin-button,
+#qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.detail-actions .btn {
+  text-align: center;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  background-clip: padding-box;
+}
+
+.detail-actions .btn-outline {
+  background: none;
+}
+
+/* ---------- 5. Toast ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-5);
+  z-index: 70;
+  max-width: calc(100% - 2rem);
+  transform: translate(-50%, 150%); /* hidden below the screen */
+  opacity: 0;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+  font-weight: 600;
+  text-align: center;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.toast.is-visible {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+/* ==========================================================
+   TABLET & DESKTOP
+   ========================================================== */
+@media (min-width: 768px) {
+  .filters {
+    grid-template-columns: 1fr 1fr auto; /* game | type | checkbox */
+    align-items: end;
+  }
+
+  .detail-grid {
+    grid-template-columns: 2fr 3fr; /* image left, info right */
+    align-items: start;
+  }
+
+  .detail-actions {
+    flex-direction: row;
+  }
+
+  .detail-actions .btn {
+    flex: 1; /* both buttons share the row equally */
+  }
+}
+
+/* Section that starts right under the page header */
+.section-flush-top {
+  padding-top: 0;
+}

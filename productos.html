@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos | Kings of the Kingdom</title>
+    <meta
+      name="description"
+      content="Kings of the Kingdom (KOTK): sobres, cajas y preventas de Pokémon TCG en Panamá con stock actualizado. Pide por WhatsApp o Instagram."
+    />
+
+    <!-- Fonts: Cinzel for titles (the "kingdom" feel), Inter for readable body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/products.css" />
+  </head>
+
+  <body>
+    <!-- Lets keyboard / screen-reader users jump past the menu -->
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">KOTK</span>
+          <span class="brand-name">Kings of the Kingdom</span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Abrir menú"
+        >
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <nav id="site-nav" class="site-nav" aria-label="Principal">
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html" aria-current="page">Productos</a></li>
+            <li><a href="noticias.html">Noticias</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main id="main">
+      <section class="page-header">
+        <div class="container">
+          <p class="eyebrow">Catálogo</p>
+          <h1>Productos</h1>
+          <p class="muted">
+            Sobres, cajas y preventas con stock actualizado. Elige tu
+            producto y haz tu pedido por WhatsApp o Instagram.
+          </p>
+        </div>
+      </section>
+
+      <section class="section section-flush-top">
+        <div class="container">
+          <div class="filters">
+            <label class="filter-field">
+              Juego
+              <select id="filter-game">
+                <option value="">Todos</option>
+              </select>
+            </label>
+            <label class="filter-field">
+              Tipo de producto
+              <select id="filter-type">
+                <option value="">Todos</option>
+              </select>
+            </label>
+            <label class="filter-field filter-check">
+              <input type="checkbox" id="filter-available" />
+              Solo disponibles
+            </label>
+          </div>
+
+          <p id="result-count" class="result-count" aria-live="polite"></p>
+
+          <div id="catalog-grid" class="card-grid">
+            <p class="placeholder">Cargando productos…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Singles: sold only by request -->
+      <section class="section section-alt">
+        <div class="container callout">
+          <div>
+            <h2>¿Buscas una carta específica?</h2>
+            <p>
+              Las cartas sueltas (singles) no están en el catálogo.
+              Escríbenos y te decimos si la tenemos.
+            </p>
+          </div>
+          <div class="callout-actions">
+            <a href="#" class="btn btn-primary" data-whatsapp>WhatsApp</a>
+            <a href="#" class="btn btn-outline" data-instagram>Instagram</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="brand-mark">KOTK</p>
+          <p class="muted">Kings of the Kingdom · Tienda de TCG en Panamá</p>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Navegación</h3>
+          <ul class="footer-links">
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="noticias.html">Noticias</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Contacto</h3>
+          <ul class="footer-links">
+            <li><a href="#" data-whatsapp>WhatsApp</a></li>
+            <li><a href="#" data-instagram>Instagram</a></li>
+            <li class="muted">Atención en línea 24/7</li>
+            <li class="muted">Ciudad de Panamá · Entregas coordinadas por WhatsApp</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p class="muted small">
+          © <span id="year"></span> Kings of the Kingdom. Pokémon y sus marcas
+          son propiedad de sus respectivos dueños. KOTK es una tienda
+          independiente.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp button (always visible) -->
+    <a href="#" class="whatsapp-float" data-whatsapp aria-label="Escríbenos por WhatsApp">
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm3 6a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
+        />
+      </svg>
+    </a>
+
+    <!-- Scripts go at the end so the HTML exists before JS looks for it.
+         config.js must load BEFORE main.js because main.js uses CONFIG. -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/sheets.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/page-catalog.js"></script>
+  </body>
+</html>
