@@ -6,7 +6,7 @@
     <title>Productos | Kings of the Kingdom</title>
     <meta
       name="description"
-      content="Kings of the Kingdom (KOTK): sobres, cajas y preventas de Pokémon TCG en Panamá con stock actualizado. Pide por WhatsApp o Instagram."
+      content="Kings of the Kingdom (KOTK): Elite Trainer Boxes, colecciones premium y accesorios de Pokémon TCG en Panamá, con stock actualizado. Pide por WhatsApp o Instagram."
     />
 
     <!-- Fonts: Cinzel for titles (the "kingdom" feel), Inter for readable body text -->
@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/products.css" />
+    <link rel="stylesheet" href="css/content.css" />
   </head>
 
   <body>
@@ -63,8 +64,8 @@
           <p class="eyebrow">Catálogo</p>
           <h1>Productos</h1>
           <p class="muted">
-            Sobres, cajas y preventas con stock actualizado. Elige tu
-            producto y haz tu pedido por WhatsApp o Instagram.
+            Todo lo que ves aquí está disponible. Elige tu producto y haz tu
+            pedido por WhatsApp o Instagram.
           </p>
         </div>
       </section>
@@ -98,19 +99,31 @@
         </div>
       </section>
 
-      <!-- Singles: sold only by request -->
+      <!-- Things we handle by chat: singles and pre-orders -->
       <section class="section section-alt">
-        <div class="container callout">
-          <div>
+        <div class="container help-grid">
+          <div class="help-card">
             <h2>¿Buscas una carta específica?</h2>
             <p>
-              Las cartas sueltas (singles) no están en el catálogo.
-              Escríbenos y te decimos si la tenemos.
+              Las cartas sueltas (singles) no están en el catálogo. Escríbenos
+              y te decimos si la tenemos.
             </p>
+            <div class="callout-actions">
+              <a href="#" class="btn btn-primary" data-whatsapp="¡Hola! Estoy buscando una carta específica:">WhatsApp</a>
+              <a href="#" class="btn btn-outline" data-instagram>Instagram</a>
+            </div>
           </div>
-          <div class="callout-actions">
-            <a href="#" class="btn btn-primary" data-whatsapp>WhatsApp</a>
-            <a href="#" class="btn btn-outline" data-instagram>Instagram</a>
+
+          <div class="help-card">
+            <h2>¿Quieres pre-ordenar un producto?</h2>
+            <p>
+              Las preventas las manejamos por chat. Escríbenos y te contamos qué
+              productos tenemos en pre-orden.
+            </p>
+            <div class="callout-actions">
+              <a href="#" class="btn btn-primary" data-whatsapp="¡Hola! Quiero saber qué productos tienen en preventa.">WhatsApp</a>
+              <a href="#" class="btn btn-outline" data-instagram>Instagram</a>
+            </div>
           </div>
         </div>
       </section>
@@ -131,6 +144,7 @@
             <li><a href="noticias.html">Noticias</a></li>
             <li><a href="eventos.html">Eventos</a></li>
             <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="contacto.html#preguntas">Preguntas frecuentes</a></li>
           </ul>
         </div>
 
@@ -140,7 +154,8 @@
             <li><a href="#" data-whatsapp>WhatsApp</a></li>
             <li><a href="#" data-instagram>Instagram</a></li>
             <li class="muted">Atención en línea 24/7</li>
-            <li class="muted">Ciudad de Panamá · Entregas coordinadas por WhatsApp</li>
+            <li><a href="#" data-maps>Showroom KOTK (Google Maps)</a></li>
+            <li class="muted">Envíos en la ciudad y al interior</li>
           </ul>
         </div>
       </div>

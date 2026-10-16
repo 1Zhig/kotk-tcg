@@ -23,6 +23,7 @@
   --color-danger: #f0506e;
 
   --font-display: "Cinzel", Georgia, serif;
+  --font-logo: "Cinzel", Georgia, serif; /* change ONLY the logo font here */
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --space-1: 0.25rem;
@@ -161,7 +162,7 @@ h3 {
 }
 
 .brand-mark {
-  font-family: var(--font-display);
+  font-family: var(--font-logo);
   font-weight: 800;
   font-size: 1.5rem;
   color: var(--color-gold);
