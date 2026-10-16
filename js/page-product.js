@@ -26,15 +26,22 @@ function renderDetail(product) {
     ? `<p class="detail-description">${escapeHTML(product.descripcion)}</p>`
     : "";
 
+  const maxQuantity = getMaxQuantity(product);
+  const limitNote =
+    product.maxPorCliente > 0
+      ? `<p class="muted small">Máximo ${product.maxPorCliente} por cliente.</p>`
+      : "";
+
   const orderSection = canOrder
     ? `
       <div class="qty">
         <label for="qty-input" class="qty-label">Cantidad:</label>
         <div class="qty-control">
           <button type="button" class="qty-btn" data-qty="-1" aria-label="Quitar uno">−</button>
-          <input id="qty-input" type="number" value="1" min="1" max="${product.stock}" inputmode="numeric" />
+          <input id="qty-input" type="number" value="1" min="1" max="${maxQuantity}" inputmode="numeric" />
           <button type="button" class="qty-btn" data-qty="1" aria-label="Agregar uno">+</button>
         </div>
+        ${limitNote}
       </div>
       <div class="detail-actions">
         <a href="#" class="btn btn-primary" id="order-whatsapp" target="_blank" rel="noopener">
@@ -74,6 +81,9 @@ function renderDetail(product) {
           ${price}
           ${releaseDate}
           ${description}
+          <p class="detail-note">
+            El contenido puede variar según el producto. Si tienes dudas, escríbenos.
+          </p>
           ${orderSection}
         </div>
       </div>
@@ -86,7 +96,7 @@ function renderDetail(product) {
     setUpOrdering(product);
   } else {
     document.querySelector("#ask-restock").href = buildWhatsappLink(
-      `¡Hola! ¿Me avisan cuando vuelva a haber "${product.nombre}" (${product.id})?`
+      `¡Hola! ¿Me avisan cuando vuelva a haber "${product.nombre}" (${product.id})?`,
     );
   }
 }
@@ -97,15 +107,22 @@ function setUpOrdering(product) {
   const whatsappButton = document.querySelector("#order-whatsapp");
   const instagramButton = document.querySelector("#order-instagram");
 
-  // Keeps the quantity between 1 and the stock, then updates the link
+  const maxQuantity = getMaxQuantity(product);
+
+  // Keeps the quantity between 1 and the maximum, then updates the link
   function setQuantity(value) {
-    const quantity = Math.min(Math.max(parseInt(value, 10) || 1, 1), product.stock);
+    const quantity = Math.min(
+      Math.max(parseInt(value, 10) || 1, 1),
+      maxQuantity,
+    );
     qtyInput.value = quantity;
 
     document.querySelector('[data-qty="-1"]').disabled = quantity <= 1;
-    document.querySelector('[data-qty="1"]').disabled = quantity >= product.stock;
+    document.querySelector('[data-qty="1"]').disabled = quantity >= maxQuantity;
 
-    whatsappButton.href = buildWhatsappLink(buildOrderMessage(product, quantity));
+    whatsappButton.href = buildWhatsappLink(
+      buildOrderMessage(product, quantity),
+    );
   }
 
   // − and + buttons: data-qty says how much to add (-1 or 1)
@@ -125,7 +142,9 @@ function setUpOrdering(product) {
       await navigator.clipboard.writeText(message);
       showToast("Mensaje copiado. Pégalo en el chat de Instagram 📋");
     } catch {
-      showToast("No se pudo copiar el mensaje. Escríbenos el código: " + product.id);
+      showToast(
+        "No se pudo copiar el mensaje. Escríbenos el código: " + product.id,
+      );
     }
     window.open(buildInstagramDMLink(), "_blank", "noopener");
   });
@@ -136,7 +155,10 @@ function setUpOrdering(product) {
 /* ---------- Start ---------- */
 async function initProduct() {
   if (!productId) {
-    renderStatus(detail, "No se indicó ningún producto. <a href='productos.html'>Ver productos</a>");
+    renderStatus(
+      detail,
+      "No se indicó ningún producto. <a href='productos.html'>Ver productos</a>",
+    );
     return;
   }
 
@@ -145,7 +167,11 @@ async function initProduct() {
     products = await loadProducts();
   } catch (error) {
     console.error(error);
-    renderStatus(detail, "No pudimos cargar este producto. Escríbenos y te ayudamos.", true);
+    renderStatus(
+      detail,
+      "No pudimos cargar este producto. Escríbenos y te ayudamos.",
+      true,
+    );
     return;
   }
 
@@ -154,7 +180,7 @@ async function initProduct() {
   if (!product) {
     renderStatus(
       detail,
-      "Este producto ya no está disponible. <a href='productos.html'>Ver todos los productos</a>"
+      "Este producto ya no está disponible. <a href='productos.html'>Ver todos los productos</a>",
     );
     return;
   }
