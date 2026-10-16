@@ -3,21 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacto | Kings of the Kingdom</title>
+    <title>Contacto y preguntas frecuentes | Kings of the Kingdom</title>
     <meta
       name="description"
-      content="Kings of the Kingdom (KOTK): sobres, cajas y preventas de Pokémon TCG en Panamá con stock actualizado. Pide por WhatsApp o Instagram."
+      content="Kings of the Kingdom (KOTK): Elite Trainer Boxes, colecciones premium y accesorios de Pokémon TCG en Panamá, con stock actualizado. Pide por WhatsApp o Instagram."
     />
 
     <!-- Fonts: Cinzel for titles (the "kingdom" feel), Inter for readable body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Cormorant+SC:wght@700&family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/content.css" />
   </head>
 
   <body>
@@ -60,14 +61,84 @@
       <section class="section">
         <div class="container contact-info">
           <h1>Contacto</h1>
-          <p class="muted">Atencion en línea 24/7</p>
+          <p class="muted">Atención en línea 24/7</p>
           <p class="muted">
-            Ciudad de Panamá · Entregas coordinadas por WhatsApp
+            Showroom en Ciudad de Panamá · Envíos en la ciudad y al interior
           </p>
 
           <div class="callout-actions">
             <a href="#" class="btn btn-primary" data-whatsapp>WhatsApp</a>
             <a href="#" class="btn btn-outline" data-instagram>Instagram</a>
+            <a href="#" class="btn btn-outline" data-maps
+              >Ver showroom en Maps</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ: <details> opens/closes by itself, no JavaScript needed -->
+      <section class="section section-alt" id="preguntas">
+        <div class="container">
+          <h2 class="faq-heading">Preguntas frecuentes</h2>
+
+          <div class="faq">
+            <details>
+              <summary>¿Qué métodos de pago aceptan?</summary>
+              <p>Yappy, efectivo y tarjeta de crédito o débito.</p>
+            </details>
+
+            <details>
+              <summary>¿Hacen envíos?</summary>
+              <p>
+                Sí.
+                <strong
+                  >Vía Argentina, El Cangrejo y El Dorado: envío gratis.</strong
+                >
+                Para otras áreas de la ciudad, escríbenos tu zona y te cotizamos
+                el delivery.
+              </p>
+              <p>
+                <strong>Al interior del país:</strong> solo pagas el envío de la
+                empresa de encomiendas que elijas. Nosotros llevamos tu pedido a
+                la empresa sin costo adicional.
+              </p>
+            </details>
+
+            <details>
+              <summary>¿Puedo retirar mi pedido en persona?</summary>
+              <p>
+                Sí, puedes retirar en nuestro showroom (aparece como
+                <strong>KOTK</strong> en Google Maps). Coordina el día y la hora
+                por WhatsApp.
+              </p>
+            </details>
+
+            <details>
+              <summary>¿Manejan preventas?</summary>
+              <p>
+                Sí, pero por ahora no a través de la página. Escríbenos por
+                WhatsApp o Instagram y te contamos qué productos tenemos en
+                pre-orden.
+              </p>
+            </details>
+
+            <details>
+              <summary>
+                ¿El contenido de los productos siempre es el mismo?
+              </summary>
+              <p>
+                Puede variar según el producto y la edición. Si quieres saber
+                exactamente qué trae, escríbenos antes de comprar.
+              </p>
+            </details>
+
+            <details>
+              <summary>¿Aceptan cambios o devoluciones?</summary>
+              <p>
+                No. Todas las ventas son finales, así que te recomendamos
+                confirmar cualquier duda antes de hacer tu pedido.
+              </p>
+            </details>
           </div>
         </div>
       </section>
@@ -88,6 +159,7 @@
             <li><a href="noticias.html">Noticias</a></li>
             <li><a href="eventos.html">Eventos</a></li>
             <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="contacto.html#preguntas">Preguntas frecuentes</a></li>
           </ul>
         </div>
 
@@ -97,9 +169,8 @@
             <li><a href="#" data-whatsapp>WhatsApp</a></li>
             <li><a href="#" data-instagram>Instagram</a></li>
             <li class="muted">Atención en línea 24/7</li>
-            <li class="muted">
-              Ciudad de Panamá · Entregas coordinadas por WhatsApp
-            </li>
+            <li><a href="#" data-maps>Showroom KOTK (Google Maps)</a></li>
+            <li class="muted">Envíos en la ciudad y al interior</li>
           </ul>
         </div>
       </div>

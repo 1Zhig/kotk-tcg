@@ -119,3 +119,111 @@
 #upcoming-events {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
 }
+
+/* ---------- 3. About section (homepage) ---------- */
+.about {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.about h2 {
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  color: var(--color-muted);
+  max-width: 42rem;
+}
+
+/* ---------- 4. Help cards (singles + pre-orders) ---------- */
+.help-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.help-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+
+.help-card p {
+  color: var(--color-muted);
+}
+
+.help-card .callout-actions {
+  margin-top: auto; /* buttons line up at the bottom of both cards */
+}
+
+/* ---------- 5. FAQ (contact page) ---------- */
+.faq-heading {
+  margin-bottom: var(--space-4);
+}
+
+.faq {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 48rem;
+}
+
+.faq details {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+}
+
+.faq details[open] {
+  border-color: var(--color-gold);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none; /* hide the default triangle */
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.faq summary::-webkit-details-marker {
+  display: none; /* hide the triangle in Safari */
+}
+
+.faq summary::after {
+  content: "+";
+  color: var(--color-gold);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.faq details[open] summary::after {
+  content: "−";
+}
+
+.faq details p {
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+}
+
+.faq strong {
+  color: var(--color-text);
+}
+
+/* ---------- 6. Wider screens ---------- */
+@media (min-width: 768px) {
+  .about {
+    grid-template-columns: 1fr 2fr; /* title left, text right */
+  }
+
+  .help-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

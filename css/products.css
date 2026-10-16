@@ -376,3 +376,11 @@
 .section-flush-top {
   padding-top: 0;
 }
+
+/* Small print under the description on the detail page */
+.detail-note {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  border-left: 2px solid var(--color-gold);
+  padding-left: var(--space-2);
+}

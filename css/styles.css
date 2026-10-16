@@ -23,6 +23,8 @@
   --color-danger: #f0506e;
 
   --font-display: "Cinzel", Georgia, serif;
+  --font-logo:
+    "Cormorant SC", Georgia, serif; /* change ONLY the logo font here */
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --space-1: 0.25rem;
@@ -161,8 +163,8 @@ h3 {
 }
 
 .brand-mark {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: var(--font-logo);
+  font-weight: 700;
   font-size: 1.5rem;
   color: var(--color-gold);
   letter-spacing: 0.08em;

@@ -11,13 +11,15 @@ Catálogo con stock actualizado, noticias, eventos y pedidos directos por WhatsA
 - [x] Filtros por juego, tipo y disponibilidad
 - [x] Página de detalle por producto con selector de cantidad
 - [x] Pedido por WhatsApp (mensaje pre-llenado) o Instagram (mensaje copiado)
-- [x] Preventas con fecha de lanzamiento
+- [x] Preventas y cartas sueltas gestionadas por chat
 - [x] Noticias de la comunidad TCG
 - [x] Eventos (los pasados se ocultan solos) con enlace de inscripción
 - [x] Página de contacto
 - [x] Publicado en GitHub Pages
 - [ ] Logo e identidad visual final
-- [ ] Preguntas frecuentes (pagos y envíos)
+- [x] Preguntas frecuentes (pagos, envíos, retiro en showroom)
+- [x] Sección "Sobre nosotros"
+- [x] Límite opcional de unidades por cliente (lanzamientos exclusivos)
 - [ ] Dominio propio
 
 ## Tecnologías
