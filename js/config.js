@@ -14,6 +14,10 @@ const CONFIG = {
   // Instagram username (without the @)
   instagramUser: "kotkpanama",
 
+  // Google Maps link of the showroom (Maps → Share → Copy link).
+  // While empty, the site searches "KOTK" on Google Maps instead.
+  mapsUrl: "https://maps.app.goo.gl/mYKhp5nj6sCekfKB7",
+
   // Default message when someone taps a general WhatsApp button
   defaultWhatsappMessage:
     "¡Hola, Kings of the Kingdom! Vengo de su página web y tengo una consulta.",
@@ -32,7 +36,7 @@ const CONFIG = {
   showPrices: true,
 
   // At this many units or fewer, show "¡Últimas unidades!"
-  lowStockThreshold: 5,
+  lowStockThreshold: 2,
 
   // How many featured products to show on the homepage
   featuredLimit: 4,

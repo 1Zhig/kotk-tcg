@@ -35,14 +35,25 @@ function buildInstagramLink() {
   return `https://www.instagram.com/${CONFIG.instagramUser}/`;
 }
 
+// data-whatsapp="custom message" uses that message; empty uses the default
 document.querySelectorAll("[data-whatsapp]").forEach((link) => {
-  link.href = buildWhatsappLink(CONFIG.defaultWhatsappMessage);
+  const message = link.dataset.whatsapp || CONFIG.defaultWhatsappMessage;
+  link.href = buildWhatsappLink(message);
   link.target = "_blank"; // open in a new tab
   link.rel = "noopener"; // security best practice for target="_blank"
 });
 
 document.querySelectorAll("[data-instagram]").forEach((link) => {
   link.href = buildInstagramLink();
+  link.target = "_blank";
+  link.rel = "noopener";
+});
+
+// Showroom on Google Maps
+document.querySelectorAll("[data-maps]").forEach((link) => {
+  link.href =
+    CONFIG.mapsUrl ||
+    "https://www.google.com/maps/search/?api=1&query=KOTK+Panam%C3%A1";
   link.target = "_blank";
   link.rel = "noopener";
 });

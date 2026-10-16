@@ -6,6 +6,7 @@
 
 const featuredGrid = document.querySelector("#featured-products");
 const upcomingGrid = document.querySelector("#upcoming-events");
+const eventsSection = document.querySelector("#events-section");
 
 async function initFeatured() {
   let products;
@@ -42,12 +43,13 @@ async function initUpcoming() {
     events = await loadUpcomingEvents();
   } catch (error) {
     console.error(error);
-    renderStatus(upcomingGrid, "No pudimos cargar los eventos.");
+    eventsSection.hidden = true; // no events section rather than an error
     return;
   }
 
+  // No upcoming events → hide the whole section on the homepage
   if (events.length === 0) {
-    renderStatus(upcomingGrid, "No hay eventos programados por ahora.");
+    eventsSection.hidden = true;
     return;
   }
 

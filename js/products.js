@@ -20,6 +20,8 @@ function toProduct(row) {
     destacado: isYes(row.destacado),
     preventa: isYes(row.preventa),
     fechaLanzamiento: row.fecha_lanzamiento,
+    // Optional column: max units per customer (empty = no limit)
+    maxPorCliente: parseInt(row.max_por_cliente, 10) || 0,
   };
 }
 
@@ -38,6 +40,14 @@ function isAvailable(product) {
   return product.stock > 0;
 }
 
+// How many units one customer can order: the stock, or the
+// per-customer limit if the Sheet sets one (for hot releases).
+function getMaxQuantity(product) {
+  return product.maxPorCliente > 0
+    ? Math.min(product.stock, product.maxPorCliente)
+    : product.stock;
+}
+
 // Decides the text and color of the stock badge.
 // For pre-orders, "stock" = how many reservations are left.
 function getStockInfo(product) {
@@ -49,9 +59,14 @@ function getStockInfo(product) {
   }
 
   // --- MODE A (active): exact numbers ---
+  if (product.stock === 1) {
+    return { label: "¡Última unidad!", className: "badge-low" };
+  }
   if (product.stock <= CONFIG.lowStockThreshold) {
-    const units = product.stock === 1 ? "unidad" : "unidades";
-    return { label: `¡Últimas ${product.stock} ${units}!`, className: "badge-low" };
+    return {
+      label: `¡Últimas ${product.stock} unidades!`,
+      className: "badge-low",
+    };
   }
   return { label: `${product.stock} disponibles`, className: "badge-ok" };
 
@@ -144,7 +159,10 @@ function showToast(text) {
   toast.classList.add("is-visible");
 
   clearTimeout(toast.hideTimer);
-  toast.hideTimer = setTimeout(() => toast.classList.remove("is-visible"), 4000);
+  toast.hideTimer = setTimeout(
+    () => toast.classList.remove("is-visible"),
+    4000,
+  );
 }
 
 /* ---------- 6. Error / empty messages ---------- */
