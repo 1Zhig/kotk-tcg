@@ -8,6 +8,8 @@ const catalogGrid = document.querySelector("#catalog-grid");
 const gameFilter = document.querySelector("#filter-game");
 const typeFilter = document.querySelector("#filter-type");
 const availableFilter = document.querySelector("#filter-available");
+const offersFilter = document.querySelector("#filter-offers");
+const offersField = document.querySelector("#filter-offers-field");
 const resultCount = document.querySelector("#result-count");
 
 let allProducts = []; // filled once the Sheet loads
@@ -29,11 +31,13 @@ function showCatalog() {
   const game = gameFilter.value; // "" means "all"
   const type = typeFilter.value;
   const onlyAvailable = availableFilter.checked;
+  const onlyOffers = offersFilter.checked;
 
   const visible = allProducts.filter((product) => {
     if (game && product.juego !== game) return false;
     if (type && product.tipo !== type) return false;
     if (onlyAvailable && !isAvailable(product)) return false;
+    if (onlyOffers && !isOnSale(product)) return false;
     return true;
   });
 
@@ -70,8 +74,11 @@ async function initCatalog() {
   fillSelect(gameFilter, allProducts.map((p) => p.juego));
   fillSelect(typeFilter, allProducts.map((p) => p.tipo));
 
+  // The "Solo ofertas" checkbox only appears when there are offers
+  offersField.hidden = !allProducts.some(isOnSale);
+
   // Re-filter every time a filter changes
-  [gameFilter, typeFilter, availableFilter].forEach((input) =>
+  [gameFilter, typeFilter, availableFilter, offersFilter].forEach((input) =>
     input.addEventListener("change", showCatalog)
   );
 

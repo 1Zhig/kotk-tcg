@@ -14,8 +14,13 @@ function renderDetail(product) {
   const canOrder = isAvailable(product);
 
   const price = CONFIG.showPrices
-    ? `<p class="detail-price">${formatPrice(product.precio)}</p>`
+    ? `<p class="detail-price-row">${renderPrice(product, "detail-price")}</p>`
     : "";
+
+  const offerEnd =
+    isOnSale(product) && product.ofertaHasta
+      ? `<p class="detail-offer-end">Oferta válida hasta el ${formatDate(product.ofertaHasta)}.</p>`
+      : "";
 
   const releaseDate =
     product.preventa && product.fechaLanzamiento
@@ -67,6 +72,7 @@ function renderDetail(product) {
     <div class="detail-grid">
       <div class="product-media detail-media">
         ${renderProductImage(product)}
+        ${renderSaleTag(product)}
       </div>
 
       <div class="detail-info">
@@ -79,6 +85,7 @@ function renderDetail(product) {
 
         <div class="detail-panel">
           ${price}
+          ${offerEnd}
           ${releaseDate}
           ${description}
           <p class="detail-note">

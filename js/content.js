@@ -11,12 +11,6 @@ function safeUrl(url) {
   return /^https?:\/\//i.test(url || "") ? url : "";
 }
 
-// Today as "2026-10-14", in the visitor's own time zone.
-// ("en-CA" happens to use exactly this year-month-day format.)
-function todayISO() {
-  return new Date().toLocaleDateString("en-CA");
-}
-
 // "2026-11-15" → { day: "15", month: "nov" } for the date badge
 function dateParts(isoDate) {
   const [year, month, day] = (isoDate || "").split("-").map(Number);

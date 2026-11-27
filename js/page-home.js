@@ -18,8 +18,11 @@ async function initFeatured() {
     return;
   }
 
-  // Featured products that can still be bought
-  let featured = products.filter((p) => p.destacado && isAvailable(p));
+  // Featured = available products marked destacado OR on sale.
+  // Products on sale go first (sort keeps the rest in order).
+  let featured = products
+    .filter((p) => isAvailable(p) && (p.destacado || isOnSale(p)))
+    .sort((a, b) => Number(isOnSale(b)) - Number(isOnSale(a)));
 
   // If none are marked as featured, show whatever is available
   if (featured.length === 0) {
@@ -31,7 +34,7 @@ async function initFeatured() {
     return;
   }
 
-  featuredGrid.innerHTML = sortProducts(featured)
+  featuredGrid.innerHTML = featured
     .slice(0, CONFIG.featuredLimit) // only the first N
     .map(renderProductBox)
     .join("");

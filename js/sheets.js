@@ -102,6 +102,12 @@ function escapeHTML(text) {
     .replaceAll("'", "&#39;");
 }
 
+// Today as "2026-10-14", in the visitor's own time zone.
+// ("en-CA" happens to use exactly this year-month-day format.)
+function todayISO() {
+  return new Date().toLocaleDateString("en-CA");
+}
+
 // "2026-11-07" → "7 de noviembre de 2026"
 function formatDate(isoDate) {
   const [year, month, day] = (isoDate || "").split("-").map(Number);
