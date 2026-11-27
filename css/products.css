@@ -354,7 +354,7 @@
    ========================================================== */
 @media (min-width: 768px) {
   .filters {
-    grid-template-columns: 1fr 1fr auto; /* game | type | checkbox */
+    grid-template-columns: 1fr 1fr auto auto; /* game | type | checkboxes */
     align-items: end;
   }
 
@@ -383,4 +383,56 @@
   color: var(--color-muted);
   border-left: 2px solid var(--color-gold);
   padding-left: var(--space-2);
+}
+
+/* ---------- Offers ---------- */
+/* The hidden attribute must win over display: flex */
+.filter-field[hidden] {
+  display: none;
+}
+
+.price-group {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.price-old {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.price-sale {
+  color: var(--color-danger);
+}
+
+/* "-25%" tag in the corner of the photo */
+.sale-tag {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 1;
+  background: var(--color-danger);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.detail-price-row {
+  margin: 0;
+}
+
+.detail-price-row .price-old {
+  font-size: 1.25rem;
+}
+
+.detail-offer-end {
+  color: var(--color-danger);
+  font-weight: 600;
+  font-size: 0.9rem;
 }

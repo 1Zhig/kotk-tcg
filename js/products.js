@@ -22,6 +22,10 @@ function toProduct(row) {
     fechaLanzamiento: row.fecha_lanzamiento,
     // Optional column: max units per customer (empty = no limit)
     maxPorCliente: parseInt(row.max_por_cliente, 10) || 0,
+    // Optional offer columns (all empty = no offer)
+    precioOferta: parseOfferPrice(row.precio_oferta),
+    ofertaDesde: (row.oferta_desde || "").trim(),
+    ofertaHasta: (row.oferta_hasta || "").trim(),
   };
 }
 
@@ -34,6 +38,71 @@ async function loadProducts() {
 
 function formatPrice(price) {
   return `$${price.toFixed(2)}`; // 5.5 → "$5.50"
+}
+
+/* ---------- Offers ----------
+   Sheet columns: precio_oferta, oferta_desde, oferta_hasta.
+   - precio_oferta empty or not a plain number → no offer.
+   - oferta_desde empty → starts right away.
+   - oferta_hasta empty → no end; the end day itself still counts.
+   - offer price must be lower than the normal price.          */
+
+// Accepts only plain numbers like "120" or "120.50".
+// Anything with letters or symbols ("120$", "veinte") → null.
+function parseOfferPrice(value) {
+  const text = (value || "").trim();
+  return /^\d+(\.\d{1,2})?$/.test(text) ? parseFloat(text) : null;
+}
+
+// True for an empty value or a real "YYYY-MM-DD" date.
+function isValidOptionalDate(value) {
+  return value === "" || /^\d{4}-\d{2}-\d{2}$/.test(value);
+}
+
+function isOnSale(product) {
+  const offer = product.precioOferta;
+  if (offer === null || offer <= 0 || offer >= product.precio) return false;
+
+  // A badly written date → ignore the offer instead of guessing
+  if (!isValidOptionalDate(product.ofertaDesde)) return false;
+  if (!isValidOptionalDate(product.ofertaHasta)) return false;
+
+  // "YYYY-MM-DD" dates compare correctly as text
+  const today = todayISO();
+  if (product.ofertaDesde && today < product.ofertaDesde) return false; // not started
+  if (product.ofertaHasta && today > product.ofertaHasta) return false; // already over
+  return true;
+}
+
+// The price the customer pays today
+function getCurrentPrice(product) {
+  return isOnSale(product) ? product.precioOferta : product.precio;
+}
+
+// 160 → 120 = "-25%"
+function getDiscountPercent(product) {
+  return Math.round((1 - product.precioOferta / product.precio) * 100);
+}
+
+// Price HTML for boxes and the detail page. Without an offer it is
+// exactly the same single price as before.
+function renderPrice(product, className = "price") {
+  if (!isOnSale(product)) {
+    return `<span class="${className}">${formatPrice(product.precio)}</span>`;
+  }
+  return `
+    <span class="price-group">
+      <s class="price-old">${formatPrice(product.precio)}</s>
+      <span class="${className} price-sale">${formatPrice(product.precioOferta)}</span>
+    </span>
+  `;
+}
+
+// Small corner tag on the photo: "-25%" (or "Oferta" if prices are hidden)
+function renderSaleTag(product) {
+  if (!isOnSale(product)) return "";
+  const label = CONFIG.showPrices ? `-${getDiscountPercent(product)}%` : "Oferta";
+  return `<span class="sale-tag">${label}</span>`;
 }
 
 function isAvailable(product) {
@@ -93,15 +162,14 @@ function sortProducts(products) {
 function renderProductBox(product) {
   const stock = getStockInfo(product);
   const link = `producto.html?id=${encodeURIComponent(product.id)}`;
-  const price = CONFIG.showPrices
-    ? `<span class="price">${formatPrice(product.precio)}</span>`
-    : "";
+  const price = CONFIG.showPrices ? renderPrice(product) : "";
 
   return `
     <article class="product-box ${isAvailable(product) ? "" : "is-sold-out"}">
       <a href="${link}" class="product-link">
         <div class="product-media">
           ${renderProductImage(product)}
+          ${renderSaleTag(product)}
         </div>
         <div class="product-body">
           <p class="product-meta">${escapeHTML(product.juego)} · ${escapeHTML(product.tipo)}</p>
@@ -130,7 +198,9 @@ function buildOrderMessage(product, quantity) {
   let message = `¡Hola, Kings of the Kingdom! Quiero pedir:\n\n`;
   message += `• ${quantity}x ${product.nombre}`;
   if (CONFIG.showPrices) {
-    message += ` (${formatPrice(product.precio)} c/u)`;
+    // Always the price shown on the page right now
+    const note = isOnSale(product) ? ", precio de oferta" : "";
+    message += ` (${formatPrice(getCurrentPrice(product))} c/u${note})`;
   }
   message += `\nCódigo: ${product.id}`;
   if (product.preventa) {
